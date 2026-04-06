@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Tungkai 30 Hari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0a0a0a;
+    --surface: #111111;
+    --border:  #1e1e1e;
+    --accent:  #b8ff57;
+    --accent2: #7fff2a;
+    --text:    #f0f0f0;
+    --muted:   #555555;
+    --dim:     #2a2a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-weight: 300;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; animation: fadeUp .3s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* NAV */
+  nav {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,.94);
+    backdrop-filter: blur(12px);
+    z-index: 99;
+  }
+  .back {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .back:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* LANDING */
+  .landing-hero {
+    padding: 56px 24px 44px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .landing-hero::before {
+    content: 'OTOT';
+    position: absolute;
+    right: -8px;
+    bottom: -16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 140px;
+    font-weight: 700;
+    color: var(--dim);
+    letter-spacing: -.02em;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .landing-hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(48px, 12vw, 80px);
+    font-weight: 700;
+    line-height: .92;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .landing-hero p {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 260px;
+    line-height: 1.65;
+  }
+
+  .level-list { list-style: none; }
+  .level-item {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .level-item:hover { background: var(--surface); }
+  .level-item:hover .level-arr { color: var(--accent); transform: translateX(5px); }
+  .level-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 24px;
+  }
+  .level-badge { display: flex; align-items: center; gap: 16px; }
+  .level-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot-rookie { background: #4ade80; }
+  .dot-epic   { background: #facc15; }
+  .dot-stars  { background: #f87171; }
+  .level-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .level-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .level-arr { font-size: 20px; color: var(--dim); transition: all .2s; }
+
+  /* PROGRAM */
+  .prog-header {
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .prog-header h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    line-height: 1;
+  }
+  .prog-header p { font-size: 12px; color: var(--muted); margin-top: 6px; letter-spacing: .04em; }
+
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .day-btn {
+    background: var(--bg);
+    border: none;
+    padding: 16px 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background .15s;
+  }
+  .day-btn:hover { background: var(--surface); }
+  .day-btn:hover .d-num { color: var(--accent); }
+  .day-btn.done { background: var(--surface); }
+  .day-btn.done .d-num { color: var(--accent); }
+  .day-btn.done .d-dot { background: var(--accent); }
+  .d-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--muted);
+    display: block;
+    line-height: 1;
+    transition: color .15s;
+  }
+  .d-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: transparent;
+    margin: 5px auto 0;
+    transition: background .15s;
+  }
+
+  /* DETAIL */
+  .detail-header {
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .detail-header h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    line-height: 1;
+  }
+  .detail-header p { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  .video-wrap {
+    margin: 24px;
+    aspect-ratio: 16/9;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 24px;
+    margin-bottom: 8px;
+  }
+
+  .ex-list { padding: 0 24px; margin-bottom: 8px; }
+  .ex-row {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-idx {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: .04em;
+    min-width: 24px;
+    padding-top: 3px;
+  }
+  .ex-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    line-height: 1;
+  }
+  .ex-detail { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* COMMENTS */
+  .comments {
+    padding: 32px 24px 48px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0 28px;
+  }
+  .comment-form input,
+  .comment-form textarea {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    resize: none;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .comment-form input::placeholder,
+  .comment-form textarea::placeholder { color: var(--muted); }
+  .comment-form input:focus,
+  .comment-form textarea:focus { border-color: var(--accent); }
+  .comment-form textarea { min-height: 68px; }
+  .comment-form button {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: 11px;
+    background: var(--accent);
+    color: #0a0a0a;
+    border: none;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .comment-form button:hover { background: var(--accent2); }
+
+  .comment-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .comment-item:last-child { border-bottom: none; }
+  .comment-who {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+  .comment-who span {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+  .comment-text { font-size: 13px; color: #999; line-height: 1.6; }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--dim); }
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="page-landing" class="page active">
+  <div class="landing-hero">
+    <span class="hero-tag">Program 30 Hari · Otot Tungkai</span>
+    <h1>Latihan<br>Mandiri</h1>
+    <p>Panduan terstruktur untuk siswa olahraga. Pilih level sesuai kemampuanmu.</p>
+  </div>
+  <ul class="level-list">
+    <li class="level-item" onclick="showProgram('Rookie')">
+      <div class="level-link">
+        <div class="level-badge">
+          <div class="level-dot dot-rookie"></div>
+          <div>
+            <div class="level-name">Rookie</div>
+            <div class="level-sub">Pemula · intensitas ringan</div>
+          </div>
+        </div>
+        <span class="level-arr">›</span>
+      </div>
+    </li>
+    <li class="level-item" onclick="showProgram('Epic')">
+      <div class="level-link">
+        <div class="level-badge">
+          <div class="level-dot dot-epic"></div>
+          <div>
+            <div class="level-name">Epic</div>
+            <div class="level-sub">Menengah · volume meningkat</div>
+          </div>
+        </div>
+        <span class="level-arr">›</span>
+      </div>
+    </li>
+    <li class="level-item" onclick="showProgram('Stars')">
+      <div class="level-link">
+        <div class="level-badge">
+          <div class="level-dot dot-stars"></div>
+          <div>
+            <div class="level-name">Stars</div>
+            <div class="level-sub">Lanjutan · intensitas tinggi</div>
+          </div>
+        </div>
+        <span class="level-arr">›</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- PROGRAM -->
+<div id="page-program" class="page">
+  <nav>
+    <button class="back" onclick="go('landing')">← Kembali</button>
+    <span class="nav-label" id="prog-nav-label"></span>
+  </nav>
+  <div class="prog-header">
+    <h2 id="prog-title"></h2>
+    <p id="prog-sub"></p>
+  </div>
+  <div id="day-grid" class="day-grid"></div>
+</div>
+
+<!-- DETAIL -->
+<div id="page-detail" class="page">
+  <nav>
+    <button class="back" onclick="go('program')">← Kembali</button>
+    <span class="nav-label" id="detail-nav-label"></span>
+  </nav>
+  <div class="detail-header">
+    <span class="detail-tag" id="detail-tag"></span>
+    <h2 id="detail-title"></h2>
+    <p id="detail-sub"></p>
+  </div>
+  <div class="video-wrap">
+    <iframe id="yt-frame" allowfullscreen
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+    </iframe>
+  </div>
+  <div class="section-label">Latihan hari ini</div>
+  <div id="ex-list" class="ex-list"></div>
+  <div class="comments">
+    <div class="section-label" style="padding:0;margin-bottom:12px;">Komentar</div>
+    <div class="comment-form">
+      <input type="text" id="c-name" placeholder="Nama kamu" maxlength="40">
+      <textarea id="c-text" placeholder="Tulis komentar atau pengalaman latihan..."></textarea>
+      <button onclick="addComment()">Kirim Komentar</button>
+    </div>
+    <div id="c-list">
+      <div class="comment-item">
+        <div class="comment-who">Rizky A. <span>· 2 jam lalu</span></div>
+        <div class="comment-text">Selesai! Bagian lunges lumayan berat tapi seru banget.</div>
+      </div>
+      <div class="comment-item">
+        <div class="comment-who">Siti R. <span>· 5 jam lalu</span></div>
+        <div class="comment-text">Wall sit 30 detik itu terasa lama banget haha. Semangat semua!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  Rookie: {
+    sub: "30 hari · Pemula · Intensitas ringan",
+    days: {
+      1: { title: "Squat Dasar", video: "aclHkVaku9U", exercises: [
+            ["Squat", "3 set × 12 rep · istirahat 60 detik"],
+            ["Lunges", "3 set × 10 rep kiri-kanan"],
+            ["Calf Raise", "3 set × 15 rep · istirahat 45 detik"],
+            ["Wall Sit", "3 set × 30 detik"]
+          ]},
+      2: { title: "Hamstring & Glute", video: "eGo4IYlbE5g", exercises: [
+            ["Glute Bridge", "3 set × 15 rep"],
+            ["Romanian Deadlift (BW)", "3 set × 12 rep"],
+            ["Step-up", "3 set × 10 rep kiri-kanan"],
+            ["Donkey Kick", "3 set × 12 rep"]
+          ]},
+      3: { title: "Istirahat Aktif", video: "4pKly2JojMw", exercises: [
+            ["Jalan Kaki", "20 menit"],
+            ["Peregangan Tungkai", "10 menit"],
+            ["Foam Rolling", "10 menit"]
+          ]},
+      4: { title: "Quad & Betis", video: "aclHkVaku9U", exercises: [
+            ["Squat", "3 set × 15 rep"],
+            ["Leg Extension (BW)", "3 set × 12 rep"],
+            ["Seated Calf Raise", "3 set × 20 rep"],
+            ["Jump Squat Kecil", "3 set × 8 rep"]
+          ]},
+      5: { title: "Full Lower Body", video: "eGo4IYlbE5g", exercises: [
+            ["Squat", "3 set × 12 rep"],
+            ["Lunges", "3 set × 10 rep"],
+            ["Glute Bridge", "3 set × 15 rep"],
+            ["Calf Raise", "3 set × 20 rep"],
+            ["Wall Sit", "2 set × 45 detik"]
+          ]}
+    }
+  },
+  Epic: {
+    sub: "30 hari · Menengah · Volume meningkat",
+    days: {
+      1: { title: "Squat Volume", video: "ultWZbUMPL8", exercises: [
+            ["Back Squat", "4 set × 10 rep"],
+            ["Bulgarian Split Squat", "3 set × 8 rep kiri-kanan"],
+            ["Leg Press", "4 set × 12 rep"],
+            ["Leg Curl", "3 set × 12 rep"]
+          ]},
+      2: { title: "Posterior Chain", video: "op9kVnSso6Q", exercises: [
+            ["Romanian Deadlift", "4 set × 10 rep"],
+            ["Glute Bridge Barbel", "4 set × 12 rep"],
+            ["Good Morning", "3 set × 10 rep"],
+            ["Nordic Curl", "3 set × 6 rep"]
+          ]},
+      3: { title: "Istirahat Aktif", video: "4pKly2JojMw", exercises: [
+            ["Renang Ringan / Jalan", "30 menit"],
+            ["Peregangan Dinamis", "15 menit"]
+          ]},
+      4: { title: "Plyometrik", video: "Dkn0wkMcFYE", exercises: [
+            ["Box Jump", "4 set × 6 rep"],
+            ["Jump Squat", "3 set × 10 rep"],
+            ["Lateral Bound", "3 set × 8 rep kiri-kanan"],
+            ["Depth Jump", "3 set × 5 rep"]
+          ]},
+      5: { title: "Full Lower Epic", video: "ultWZbUMPL8", exercises: [
+            ["Squat", "4 set × 10 rep"],
+            ["Deadlift", "3 set × 8 rep"],
+            ["Lunges Barbel", "3 set × 10 rep"],
+            ["Calf Raise Mesin", "4 set × 20 rep"]
+          ]}
+    }
+  },
+  Stars: {
+    sub: "30 hari · Lanjutan · Intensitas tinggi",
+    days: {
+      1: { title: "Max Strength Squat", video: "bEv6CCg2BC8", exercises: [
+            ["Back Squat", "5 set × 5 rep (berat)"],
+            ["Front Squat", "4 set × 6 rep"],
+            ["Hack Squat", "3 set × 8 rep"],
+            ["Sissy Squat", "3 set × 10 rep"]
+          ]},
+      2: { title: "Hamstring Intensif", video: "op9kVnSso6Q", exercises: [
+            ["Romanian Deadlift", "5 set × 6 rep (berat)"],
+            ["Nordic Curl", "4 set × 6 rep"],
+            ["Glute Ham Raise", "3 set × 8 rep"],
+            ["Leg Curl Mesin", "4 set × 10 rep"]
+          ]},
+      3: { title: "Sprint & Agility", video: "lSSgD_nKUaI", exercises: [
+            ["Sprint 60m", "6 kali · istirahat 2 menit"],
+            ["Cone Drill", "4 set"],
+            ["Ladder Drill", "4 set"],
+            ["Lateral Shuffle", "4 set × 20 meter"]
+          ]},
+      4: { title: "Power Plyometrik", video: "Dkn0wkMcFYE", exercises: [
+            ["Depth Jump", "5 set × 5 rep"],
+            ["Box Jump Tinggi", "5 set × 5 rep"],
+            ["Single Leg Jump", "4 set × 6 rep kiri-kanan"],
+            ["Broad Jump", "4 set × 5 rep"]
+          ]},
+      5: { title: "Full Stars Circuit", video: "bEv6CCg2BC8", exercises: [
+            ["Squat Berat", "5 set × 5 rep"],
+            ["Deadlift", "4 set × 5 rep"],
+            ["Box Jump", "4 set × 6 rep"],
+            ["Sprint 40m", "5 kali"],
+            ["Nordic Curl", "3 set × 6 rep"]
+          ]}
+    }
+  }
+};
+
+Object.keys(DATA).forEach(lvl => {
+  for (let d = 6; d <= 30; d++) DATA[lvl].days[d] = DATA[lvl].days[(d % 5) || 5];
+});
+
+const done = [1, 2, 3];
+let currentLevel = '';
+
+function go(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showProgram(level) {
+  currentLevel = level;
+  document.getElementById('prog-nav-label').textContent = level;
+  document.getElementById('prog-title').textContent = 'Program ' + level;
+  document.getElementById('prog-sub').textContent = DATA[level].sub;
+
+  const grid = document.getElementById('day-grid');
+  grid.innerHTML = '';
+  for (let i = 1; i <= 30; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'day-btn' + (done.includes(i) ? ' done' : '');
+    btn.innerHTML = `<span class="d-num">${i}</span><div class="d-dot"></div>`;
+    btn.onclick = () => showDetail(i);
+    grid.appendChild(btn);
+  }
+  go('program');
+}
+
+function showDetail(day) {
+  const d = DATA[currentLevel].days[day];
+  document.getElementById('detail-nav-label').textContent = `${currentLevel} · Hari ${day}`;
+  document.getElementById('detail-tag').textContent = `${currentLevel} · Hari ${day} dari 30`;
+  document.getElementById('detail-title').textContent = d.title;
+  document.getElementById('detail-sub').textContent = DATA[currentLevel].sub;
+  document.getElementById('yt-frame').src = `https://www.youtube.com/embed/${d.video}?rel=0`;
+  document.getElementById('ex-list').innerHTML = d.exercises.map((ex, i) =>
+    `<div class="ex-row">
+      <span class="ex-idx">0${i+1}</span>
+      <div>
+        <div class="ex-name">${ex[0]}</div>
+        <div class="ex-detail">${ex[1]}</div>
+      </div>
+    </div>`
+  ).join('');
+  go('detail');
+}
+
+function addComment() {
+  const name = document.getElementById('c-name').value.trim();
+  const text = document.getElementById('c-text').value.trim();
+  if (!name || !text) return;
+  const el = document.createElement('div');
+  el.className = 'comment-item';
+  el.style.animation = 'fadeUp .3s ease';
+  el.innerHTML = `<div class="comment-who">${esc(name)} <span>· baru saja</span></div><div class="comment-text">${esc(text)}</div>`;
+  document.getElementById('c-list').prepend(el);
+  document.getElementById('c-name').value = '';
+  document.getElementById('c-text').value = '';
+}
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
