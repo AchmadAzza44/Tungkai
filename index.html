@@ -31,6 +31,15 @@
   .page { display: none; }
   .page.active { display: block; animation: fadeUp .3s ease; }
 
+  /* Wrapper proporsional semua konten */
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 100vh;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -48,6 +57,8 @@
     background: rgba(10,10,10,.94);
     backdrop-filter: blur(12px);
     z-index: 99;
+    max-width: 680px;
+    margin: 0 auto;
   }
   .back {
     font-family: 'Barlow Condensed', sans-serif;
@@ -347,6 +358,8 @@
 </head>
 <body>
 
+<div class="wrap">
+
 <!-- LANDING -->
 <div id="page-landing" class="page active">
   <div class="landing-hero">
@@ -620,5 +633,6 @@ function esc(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 </script>
+</div><!-- end .wrap -->
 </body>
 </html>
