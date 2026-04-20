@@ -31,7 +31,6 @@
   .page { display: none; }
   .page.active { display: block; animation: fadeUp .3s ease; }
 
-  /* Wrapper proporsional semua konten */
   .wrap {
     max-width: 680px;
     margin: 0 auto;
@@ -45,7 +44,6 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* NAV */
   nav {
     padding: 14px 24px;
     border-bottom: 1px solid var(--border);
@@ -82,7 +80,6 @@
     color: var(--muted);
   }
 
-  /* LANDING */
   .landing-hero {
     padding: 56px 24px 44px;
     border-bottom: 1px solid var(--border);
@@ -159,7 +156,6 @@
   .level-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
   .level-arr { font-size: 20px; color: var(--dim); transition: all .2s; }
 
-  /* PROGRAM */
   .prog-header {
     padding: 28px 24px;
     border-bottom: 1px solid var(--border);
@@ -212,7 +208,6 @@
     transition: background .15s;
   }
 
-  /* DETAIL */
   .detail-header {
     padding: 28px 24px;
     border-bottom: 1px solid var(--border);
@@ -285,7 +280,6 @@
   }
   .ex-detail { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
-  /* COMMENTS */
   .comments {
     padding: 32px 24px 48px;
     border-top: 1px solid var(--border);
@@ -360,7 +354,6 @@
 
 <div class="wrap">
 
-<!-- LANDING -->
 <div id="page-landing" class="page active">
   <div class="landing-hero">
     <span class="hero-tag">Program 30 Hari · Otot Tungkai</span>
@@ -373,8 +366,8 @@
         <div class="level-badge">
           <div class="level-dot dot-rookie"></div>
           <div>
-            <div class="level-name">Rookie</div>
-            <div class="level-sub">Pemula · intensitas ringan</div>
+            <div class="level-name">Level 1</div>
+            <div class="level-sub">Jinjit & Lompat Dasar</div>
           </div>
         </div>
         <span class="level-arr">›</span>
@@ -385,8 +378,8 @@
         <div class="level-badge">
           <div class="level-dot dot-epic"></div>
           <div>
-            <div class="level-name">Epic</div>
-            <div class="level-sub">Menengah · volume meningkat</div>
+            <div class="level-name">Level 2</div>
+            <div class="level-sub">Plane Style & Koordinasi</div>
           </div>
         </div>
         <span class="level-arr">›</span>
@@ -397,8 +390,8 @@
         <div class="level-badge">
           <div class="level-dot dot-stars"></div>
           <div>
-            <div class="level-name">Stars</div>
-            <div class="level-sub">Lanjutan · intensitas tinggi</div>
+            <div class="level-name">Level 3</div>
+            <div class="level-sub">Vertical & Box Jump</div>
           </div>
         </div>
         <span class="level-arr">›</span>
@@ -407,7 +400,6 @@
   </ul>
 </div>
 
-<!-- PROGRAM -->
 <div id="page-program" class="page">
   <nav>
     <button class="back" onclick="go('landing')">← Kembali</button>
@@ -420,7 +412,6 @@
   <div id="day-grid" class="day-grid"></div>
 </div>
 
-<!-- DETAIL -->
 <div id="page-detail" class="page">
   <nav>
     <button class="back" onclick="go('program')">← Kembali</button>
@@ -448,127 +439,78 @@
     <div id="c-list">
       <div class="comment-item">
         <div class="comment-who">Rizky A. <span>· 2 jam lalu</span></div>
-        <div class="comment-text">Selesai! Bagian lunges lumayan berat tapi seru banget.</div>
+        <div class="comment-text">Selesai! Repetisi hari ini lumayan berat tapi seru banget.</div>
       </div>
       <div class="comment-item">
         <div class="comment-who">Siti R. <span>· 5 jam lalu</span></div>
-        <div class="comment-text">Wall sit 30 detik itu terasa lama banget haha. Semangat semua!</div>
+        <div class="comment-text">Latihan pakai anak tangga sangat terasa di otot betis haha. Semangat semua!</div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+function getReps(day) {
+  if (day <= 5) return "10x";
+  if (day <= 10) return "15x";
+  if (day <= 15) return "20x";
+  if (day <= 20) return "30x";
+  if (day <= 25) return "40x";
+  return "50x";
+}
+
 const DATA = {
-  Rookie: {
-    sub: "30 hari · Pemula · Intensitas ringan",
-    days: {
-      1: { title: "Squat Dasar", video: "aclHkVaku9U", exercises: [
-            ["Squat", "3 set × 12 rep · istirahat 60 detik"],
-            ["Lunges", "3 set × 10 rep kiri-kanan"],
-            ["Calf Raise", "3 set × 15 rep · istirahat 45 detik"],
-            ["Wall Sit", "3 set × 30 detik"]
-          ]},
-      2: { title: "Hamstring & Glute", video: "eGo4IYlbE5g", exercises: [
-            ["Glute Bridge", "3 set × 15 rep"],
-            ["Romanian Deadlift (BW)", "3 set × 12 rep"],
-            ["Step-up", "3 set × 10 rep kiri-kanan"],
-            ["Donkey Kick", "3 set × 12 rep"]
-          ]},
-      3: { title: "Istirahat Aktif", video: "4pKly2JojMw", exercises: [
-            ["Jalan Kaki", "20 menit"],
-            ["Peregangan Tungkai", "10 menit"],
-            ["Foam Rolling", "10 menit"]
-          ]},
-      4: { title: "Quad & Betis", video: "aclHkVaku9U", exercises: [
-            ["Squat", "3 set × 15 rep"],
-            ["Leg Extension (BW)", "3 set × 12 rep"],
-            ["Seated Calf Raise", "3 set × 20 rep"],
-            ["Jump Squat Kecil", "3 set × 8 rep"]
-          ]},
-      5: { title: "Full Lower Body", video: "eGo4IYlbE5g", exercises: [
-            ["Squat", "3 set × 12 rep"],
-            ["Lunges", "3 set × 10 rep"],
-            ["Glute Bridge", "3 set × 15 rep"],
-            ["Calf Raise", "3 set × 20 rep"],
-            ["Wall Sit", "2 set × 45 detik"]
-          ]}
-    }
-  },
-  Epic: {
-    sub: "30 hari · Menengah · Volume meningkat",
-    days: {
-      1: { title: "Squat Volume", video: "ultWZbUMPL8", exercises: [
-            ["Back Squat", "4 set × 10 rep"],
-            ["Bulgarian Split Squat", "3 set × 8 rep kiri-kanan"],
-            ["Leg Press", "4 set × 12 rep"],
-            ["Leg Curl", "3 set × 12 rep"]
-          ]},
-      2: { title: "Posterior Chain", video: "op9kVnSso6Q", exercises: [
-            ["Romanian Deadlift", "4 set × 10 rep"],
-            ["Glute Bridge Barbel", "4 set × 12 rep"],
-            ["Good Morning", "3 set × 10 rep"],
-            ["Nordic Curl", "3 set × 6 rep"]
-          ]},
-      3: { title: "Istirahat Aktif", video: "4pKly2JojMw", exercises: [
-            ["Renang Ringan / Jalan", "30 menit"],
-            ["Peregangan Dinamis", "15 menit"]
-          ]},
-      4: { title: "Plyometrik", video: "Dkn0wkMcFYE", exercises: [
-            ["Box Jump", "4 set × 6 rep"],
-            ["Jump Squat", "3 set × 10 rep"],
-            ["Lateral Bound", "3 set × 8 rep kiri-kanan"],
-            ["Depth Jump", "3 set × 5 rep"]
-          ]},
-      5: { title: "Full Lower Epic", video: "ultWZbUMPL8", exercises: [
-            ["Squat", "4 set × 10 rep"],
-            ["Deadlift", "3 set × 8 rep"],
-            ["Lunges Barbel", "3 set × 10 rep"],
-            ["Calf Raise Mesin", "4 set × 20 rep"]
-          ]}
-    }
-  },
-  Stars: {
-    sub: "30 hari · Lanjutan · Intensitas tinggi",
-    days: {
-      1: { title: "Max Strength Squat", video: "bEv6CCg2BC8", exercises: [
-            ["Back Squat", "5 set × 5 rep (berat)"],
-            ["Front Squat", "4 set × 6 rep"],
-            ["Hack Squat", "3 set × 8 rep"],
-            ["Sissy Squat", "3 set × 10 rep"]
-          ]},
-      2: { title: "Hamstring Intensif", video: "op9kVnSso6Q", exercises: [
-            ["Romanian Deadlift", "5 set × 6 rep (berat)"],
-            ["Nordic Curl", "4 set × 6 rep"],
-            ["Glute Ham Raise", "3 set × 8 rep"],
-            ["Leg Curl Mesin", "4 set × 10 rep"]
-          ]},
-      3: { title: "Sprint & Agility", video: "lSSgD_nKUaI", exercises: [
-            ["Sprint 60m", "6 kali · istirahat 2 menit"],
-            ["Cone Drill", "4 set"],
-            ["Ladder Drill", "4 set"],
-            ["Lateral Shuffle", "4 set × 20 meter"]
-          ]},
-      4: { title: "Power Plyometrik", video: "Dkn0wkMcFYE", exercises: [
-            ["Depth Jump", "5 set × 5 rep"],
-            ["Box Jump Tinggi", "5 set × 5 rep"],
-            ["Single Leg Jump", "4 set × 6 rep kiri-kanan"],
-            ["Broad Jump", "4 set × 5 rep"]
-          ]},
-      5: { title: "Full Stars Circuit", video: "bEv6CCg2BC8", exercises: [
-            ["Squat Berat", "5 set × 5 rep"],
-            ["Deadlift", "4 set × 5 rep"],
-            ["Box Jump", "4 set × 6 rep"],
-            ["Sprint 40m", "5 kali"],
-            ["Nordic Curl", "3 set × 6 rep"]
-          ]}
-    }
-  }
+  Rookie: { sub: "30 hari · Level 1", days: {} },
+  Epic: { sub: "30 hari · Level 2", days: {} },
+  Stars: { sub: "30 hari · Level 3", days: {} }
 };
 
-Object.keys(DATA).forEach(lvl => {
-  for (let d = 6; d <= 30; d++) DATA[lvl].days[d] = DATA[lvl].days[(d % 5) || 5];
-});
+for (let i = 1; i <= 30; i++) {
+  let reps = getReps(i);
+
+  // LEVEL 1
+  DATA.Rookie.days[i] = {
+    title: "Latihan Level 1",
+    video: "8jPtbiRCmNE",
+    exercises: [
+      ["Jinjit kaki satu (Kanan)", reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan biarkan sisanya melayang, Kaki satunya (kiri) dibiarkan melayang (boleh berpegangan)"],
+      ["Jinjit Satu kaki (kiri)", reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan biarkan sisanya melayang, Kaki satunya (kanan) dibiarkan melayang (boleh berpegangan)"],
+      ["Jinjit menggunakan 2 kaki", reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan sisaya melayang seperti di video (boleh berpegangan)"],
+      ["Lompat 1 kaki (Kanan)", reps + " · Angkat 1 kaki(kaki kiri) lalu lompat ke anak tangga seperti di video. kaki ketika mendarat usahakan jinjit"],
+      ["Lompat 1 Kaki(Kiri)", reps + " · Angkat 1 kaki (kaki kanan) lalu lompat ke anak tangga seperti di video. kaki ketika mendarat usahakan jinjit"],
+      ["Lompat 2 kaki", reps + " · Lompat menggunakan 2 kaki ke anak tangga."],
+      ["Kuda-Kuda Lompat", reps + " · Ambil kuda kuda dengan cara melebarkan kaki selebar bahu, lalu angkat kedua tangan keatas, sedikit membungkuk lalu lompat vertikal keatas dengan telapak kaki jinjit"],
+      ["Lompat dan mendarat Kuda kuda", reps + " · Naik ke anak tangga yang lebih tinggi. lalu lompat dan mendarat dengan cara kedua kaki jinjit dan kedua tangan ke atas seperti gerakan kuda kuda di gerakan ke 7"]
+    ]
+  };
+
+  // LEVEL 2
+  DATA.Epic.days[i] = {
+    title: "Latihan Level 2",
+    video: "Ca9hGyYIC8Q",
+    exercises: [
+      ["Lompat kaki 1 Plane style (Kanan)", reps + " · 1 kaki diletakkan di anak tangga(Kaki Kiri), posisi badan condong seperti di video. lompat dengan 1 kaki (Kanan) hingga lutut terkena dada. lalu telapak kaki jinjit"],
+      ["Lompat Kaki 1 Plane Style (Kiri)", reps + " · 1 kaki diletakkan di anak tangga(Kaki kanan), posisi badan condong seperti di video. lompat dengan 1 kaki (Kaki kiri) hingga lutut terkena dada. lalu telapak kaki jinjit"],
+      ["Koordinasi Kaki (Kanan)", reps + " · 1 kaki diletakkan di anak tangga(Kaki kiri), posisi badan condong seperti di video. Kaki 1 (Kaki kanan) Jinjit dan lompat ke kanan dan kekiri"],
+      ["Koordinasi Kaki (Kiri)", reps + " · 1 kaki diletakkan di anak tangga(Kaki kanan), posisi badan condong seperti di video. Kaki 1 (Kaki kiri)Jinjit dan lompat ke kanan dan kekiri"],
+      ["Lompat Seimbang 1 Kaki (Kanan)", reps + " · 1 kaki diletakkan di anak tangga(Kaki Kiri), posisi badan condong seperti di video. Tangan direntangkan seimbang. lompat dengan 1 kaki (Kaki kanan)hingga lutut terkena dada. lalu telapak kaki jinjit"],
+      ["Lompat Seimbang Kaki 1 (Kiri)", reps + " · 1 kaki diletakkan di anak tangga(Kaki Kanan), posisi badan condong seperti di video. Tangan direntangkan seimbang. lompat dengan 1 kaki (Kaki Kiri)hingga lutut terkena dada. lalu telapak kaki jinjit"]
+    ]
+  };
+
+  // LEVEL 3
+  DATA.Stars.days[i] = {
+    title: "Latihan Level 3",
+    video: "8PSj8B7LGoo",
+    exercises: [
+      ["Berlutut dan Vertical Jump", reps + " · Berlutut seperti di video tangan keatas, lompat untuk ambil posisi jongkok lalu lompat 1 kali lagi vertical Jump"],
+      ["SkotJump", reps + " · Lakukan SkotJump namun dengan tangan keatas"],
+      ["Vertical Jump dan Lompat jauh", reps + " · Lakukan Vertical Jump seperti divideo dengan telapak kaki jinjit lalu lompat jauh kedepan dengan mendarat jongkok dan telapak kaki jinji serta tangan tetap berada diatas"],
+      ["Gerakan Box jump", reps + " · Pakai Box jump atau anak tangga yang lumayan tinggi untuk melakukan gerakan ini letakkan 1 kaki keatas anak tangga/box jump lompat keatas sembari bergantian kaki yang berada diatas"],
+      ["Lompat dan Jinjit", reps + " · Lompat Keatas Box Jump/Anak tangga yang lumayan tinggi lalu lakukan jinji dengan tangan berada diatas"]
+    ]
+  };
+}
 
 const done = [1, 2, 3];
 let currentLevel = '';
@@ -581,8 +523,9 @@ function go(page) {
 
 function showProgram(level) {
   currentLevel = level;
-  document.getElementById('prog-nav-label').textContent = level;
-  document.getElementById('prog-title').textContent = 'Program ' + level;
+  let levelTitle = level === 'Rookie' ? 'Level 1' : level === 'Epic' ? 'Level 2' : 'Level 3';
+  document.getElementById('prog-nav-label').textContent = levelTitle;
+  document.getElementById('prog-title').textContent = 'Program ' + levelTitle;
   document.getElementById('prog-sub').textContent = DATA[level].sub;
 
   const grid = document.getElementById('day-grid');
@@ -599,8 +542,9 @@ function showProgram(level) {
 
 function showDetail(day) {
   const d = DATA[currentLevel].days[day];
-  document.getElementById('detail-nav-label').textContent = `${currentLevel} · Hari ${day}`;
-  document.getElementById('detail-tag').textContent = `${currentLevel} · Hari ${day} dari 30`;
+  let levelTitle = currentLevel === 'Rookie' ? 'Level 1' : currentLevel === 'Epic' ? 'Level 2' : 'Level 3';
+  document.getElementById('detail-nav-label').textContent = `${levelTitle} · Hari ${day}`;
+  document.getElementById('detail-tag').textContent = `${levelTitle} · Hari ${day} dari 30`;
   document.getElementById('detail-title').textContent = d.title;
   document.getElementById('detail-sub').textContent = DATA[currentLevel].sub;
   document.getElementById('yt-frame').src = `https://www.youtube.com/embed/${d.video}?rel=0`;
@@ -633,6 +577,6 @@ function esc(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 </script>
-</div><!-- end .wrap -->
+</div>
 </body>
 </html>
