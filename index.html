@@ -450,13 +450,14 @@
 </div>
 
 <script>
-function getReps(day) {
-  if (day <= 5) return "10x";
-  if (day <= 10) return "15x";
-  if (day <= 15) return "20x";
-  if (day <= 20) return "30x";
-  if (day <= 25) return "40x";
-  return "50x";
+// Fungsi untuk mengambil informasi Repetisi dan Judul Hari sesuai interval PDF
+function getDayInfo(day) {
+  if (day <= 5) return { title: "Gerakan Hari 1-5", reps: "10x" };
+  if (day <= 10) return { title: "Gerakan Hari 6-10", reps: "15x" };
+  if (day <= 15) return { title: "Gerakan Hari 11-15", reps: "20x" };
+  if (day <= 20) return { title: "Gerakan Hari 16-20", reps: "30x" };
+  if (day <= 25) return { title: "Gerakan Hari 21-25", reps: "40x" };
+  return { title: "Gerakan Hari 26-30", reps: "50x" };
 }
 
 const DATA = {
@@ -465,54 +466,55 @@ const DATA = {
   Stars: { sub: "30 hari · Level 3", days: {} }
 };
 
+// Generate Semua 30 Hari secara terstruktur 
 for (let i = 1; i <= 30; i++) {
-  let reps = getReps(i);
+  let info = getDayInfo(i);
 
   // LEVEL 1
   DATA.Rookie.days[i] = {
-    title: "Latihan Level 1",
+    title: info.title,
     video: "8jPtbiRCmNE",
     exercises: [
-      ["Jinjit kaki satu (Kanan)", reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan biarkan sisanya melayang, Kaki satunya (kiri) dibiarkan melayang (boleh berpegangan)"],
-      ["Jinjit Satu kaki (kiri)", reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan biarkan sisanya melayang, Kaki satunya (kanan) dibiarkan melayang (boleh berpegangan)"],
-      ["Jinjit menggunakan 2 kaki", reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan sisaya melayang seperti di video (boleh berpegangan)"],
-      ["Lompat 1 kaki (Kanan)", reps + " · Angkat 1 kaki(kaki kiri) lalu lompat ke anak tangga seperti di video. kaki ketika mendarat usahakan jinjit"],
-      ["Lompat 1 Kaki(Kiri)", reps + " · Angkat 1 kaki (kaki kanan) lalu lompat ke anak tangga seperti di video. kaki ketika mendarat usahakan jinjit"],
-      ["Lompat 2 kaki", reps + " · Lompat menggunakan 2 kaki ke anak tangga."],
-      ["Kuda-Kuda Lompat", reps + " · Ambil kuda kuda dengan cara melebarkan kaki selebar bahu, lalu angkat kedua tangan keatas, sedikit membungkuk lalu lompat vertikal keatas dengan telapak kaki jinjit"],
-      ["Lompat dan mendarat Kuda kuda", reps + " · Naik ke anak tangga yang lebih tinggi. lalu lompat dan mendarat dengan cara kedua kaki jinjit dan kedua tangan ke atas seperti gerakan kuda kuda di gerakan ke 7"]
+      ["1. Jinjit kaki satu (Kanan)", "REPITISI: " + info.reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan biarkan sisanya melayang, Kaki satunya (kiri) dibiarkan melayang (boleh berpegangan)"],
+      ["2. Jinjit Satu kaki (kiri)", "REPITISI: " + info.reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan biarkan sisanya melayang, Kaki satunya (kanan) dibiarkan melayang (boleh berpegangan)"],
+      ["3. Jinjit menggunakan 2 kaki", "REPITISI: " + info.reps + " · Gunakan anak tangga seperti di video atau apapun itu, Letakankan ujung kaki dianak tangga dan sisaya melayang seperti di video (boleh berpegangan)"],
+      ["4. Lompat 1 kaki (Kanan)", "REPITISI: " + info.reps + " · Angkat 1 kaki(kaki kiri) lalu lompat ke anak tangga seperti di video. kaki ketika mendarat usahakan jinjit"],
+      ["5. Lompat 1 Kaki(Kiri)", "REPITISI: " + info.reps + " · Angkat 1 kaki (kaki kanan) lalu lompat ke anak tangga seperti di video. kaki ketika mendarat usahakan jinjit"],
+      ["6. Lompat 2 kaki", "REPITISI: " + info.reps + " · Lompat menggunakan 2 kaki ke anak tangga."],
+      ["7. Kuda-Kuda Lompat", "REPITISI: " + info.reps + " · Ambil kuda kuda dengan cara melebarkan kaki selebar bahu, lalu angkat kedua tangan keatas, sedikit membungkuk lalu lompat vertikal keatas dengan telapak kaki jinjit"],
+      ["8. Lompat dan mendarat Kuda kuda", "REPITISI: " + info.reps + " · Naik ke anak tangga yang lebih tinggi. lalu lompat dan mendarat dengan cara kedua kaki jinjit dan kedua tangan ke atas seperti gerakan kuda kuda di gerakan ke 7"]
     ]
   };
 
   // LEVEL 2
   DATA.Epic.days[i] = {
-    title: "Latihan Level 2",
+    title: info.title,
     video: "Ca9hGyYIC8Q",
     exercises: [
-      ["Lompat kaki 1 Plane style (Kanan)", reps + " · 1 kaki diletakkan di anak tangga(Kaki Kiri), posisi badan condong seperti di video. lompat dengan 1 kaki (Kanan) hingga lutut terkena dada. lalu telapak kaki jinjit"],
-      ["Lompat Kaki 1 Plane Style (Kiri)", reps + " · 1 kaki diletakkan di anak tangga(Kaki kanan), posisi badan condong seperti di video. lompat dengan 1 kaki (Kaki kiri) hingga lutut terkena dada. lalu telapak kaki jinjit"],
-      ["Koordinasi Kaki (Kanan)", reps + " · 1 kaki diletakkan di anak tangga(Kaki kiri), posisi badan condong seperti di video. Kaki 1 (Kaki kanan) Jinjit dan lompat ke kanan dan kekiri"],
-      ["Koordinasi Kaki (Kiri)", reps + " · 1 kaki diletakkan di anak tangga(Kaki kanan), posisi badan condong seperti di video. Kaki 1 (Kaki kiri)Jinjit dan lompat ke kanan dan kekiri"],
-      ["Lompat Seimbang 1 Kaki (Kanan)", reps + " · 1 kaki diletakkan di anak tangga(Kaki Kiri), posisi badan condong seperti di video. Tangan direntangkan seimbang. lompat dengan 1 kaki (Kaki kanan)hingga lutut terkena dada. lalu telapak kaki jinjit"],
-      ["Lompat Seimbang Kaki 1 (Kiri)", reps + " · 1 kaki diletakkan di anak tangga(Kaki Kanan), posisi badan condong seperti di video. Tangan direntangkan seimbang. lompat dengan 1 kaki (Kaki Kiri)hingga lutut terkena dada. lalu telapak kaki jinjit"]
+      ["1. Lompat kaki 1 Plane style (Kanan)", "REPITISI: " + info.reps + " · 1 kaki diletakkan di anak tangga(Kaki Kiri), posisi badan condong seperti di video. lompat dengan 1 kaki (Kanan) hingga lutut terkena dada. lalu telapak kaki jinjit"],
+      ["2. Lompat Kaki 1 Plane Style (Kiri)", "REPITISI: " + info.reps + " · 1 kaki diletakkan di anak tangga(Kaki kanan), posisi badan condong seperti di video. lompat dengan 1 kaki (Kaki kiri) hingga lutut terkena dada. lalu telapak kaki jinjit"],
+      ["3. Koordinasi Kaki (Kanan)", "REPITISI: " + info.reps + " · 1 kaki diletakkan di anak tangga(Kaki kiri), posisi badan condong seperti di video. Kaki 1 (Kaki kanan) Jinjit dan lompat ke kanan dan kekiri"],
+      ["4. Koordinasi Kaki (Kiri)", "REPITISI: " + info.reps + " · 1 kaki diletakkan di anak tangga(Kaki kanan), posisi badan condong seperti di video. Kaki 1 (Kaki kiri)Jinjit dan lompat ke kanan dan kekiri"],
+      ["5. Lompat Seimbang 1 Kaki (Kanan)", "REPITISI: " + info.reps + " · 1 kaki diletakkan di anak tangga(Kaki Kiri), posisi badan condong seperti di video. Tangan direntangkan seimbang. lompat dengan 1 kaki (Kaki kanan)hingga lutut terkena dada. lalu telapak kaki jinjit"],
+      ["6. Lompat Seimbang Kaki 1 (Kiri)", "REPITISI: " + info.reps + " · 1 kaki diletakkan di anak tangga(Kaki Kanan), posisi badan condong seperti di video. Tangan direntangkan seimbang. lompat dengan 1 kaki (Kaki Kiri)hingga lutut terkena dada. lalu telapak kaki jinjit"]
     ]
   };
 
   // LEVEL 3
   DATA.Stars.days[i] = {
-    title: "Latihan Level 3",
+    title: info.title,
     video: "8PSj8B7LGoo",
     exercises: [
-      ["Berlutut dan Vertical Jump", reps + " · Berlutut seperti di video tangan keatas, lompat untuk ambil posisi jongkok lalu lompat 1 kali lagi vertical Jump"],
-      ["SkotJump", reps + " · Lakukan SkotJump namun dengan tangan keatas"],
-      ["Vertical Jump dan Lompat jauh", reps + " · Lakukan Vertical Jump seperti divideo dengan telapak kaki jinjit lalu lompat jauh kedepan dengan mendarat jongkok dan telapak kaki jinji serta tangan tetap berada diatas"],
-      ["Gerakan Box jump", reps + " · Pakai Box jump atau anak tangga yang lumayan tinggi untuk melakukan gerakan ini letakkan 1 kaki keatas anak tangga/box jump lompat keatas sembari bergantian kaki yang berada diatas"],
-      ["Lompat dan Jinjit", reps + " · Lompat Keatas Box Jump/Anak tangga yang lumayan tinggi lalu lakukan jinji dengan tangan berada diatas"]
+      ["1. Berlutut dan Vertical Jump", "REPITISI: " + info.reps + " · Berlutut seperti di video tangan keatas, lompat untuk ambil posisi jongkok lalu lompat 1 kali lagi vertical Jump"],
+      ["2. SkotJump", "REPITISI: " + info.reps + " · Lakukan SkotJump namun dengan tangan keatas"],
+      ["3. Vertical Jump dan Lompat jauh", "REPITISI: " + info.reps + " · Lakukan Vertical Jump seperti divideo dengan telapak kaki jinjit lalu lompat jauh kedepan dengan mendarat jongkok dan telapak kaki jinji serta tangan tetap berada diatas"],
+      ["4. Gerakan Box jump", "REPITISI: " + info.reps + " · Pakai Box jump atau anak tangga yang lumayan tinggi untuk melakukan gerakan ini letakkan 1 kaki keatas anak tangga/box jump lompat keatas sembari bergantian kaki yang berada diatas"],
+      ["5. Lompat dan Jinjit", "REPITISI: " + info.reps + " · Lompat Keatas Box Jump/Anak tangga yang lumayan tinggi lalu lakukan jinji dengan tangan berada diatas"]
     ]
   };
 }
 
-const done = [1, 2, 3];
+const done = [];
 let currentLevel = '';
 
 function go(page) {
@@ -543,14 +545,18 @@ function showProgram(level) {
 function showDetail(day) {
   const d = DATA[currentLevel].days[day];
   let levelTitle = currentLevel === 'Rookie' ? 'Level 1' : currentLevel === 'Epic' ? 'Level 2' : 'Level 3';
+  
+  // Mengupdate navigasi & header detail 
   document.getElementById('detail-nav-label').textContent = `${levelTitle} · Hari ${day}`;
-  document.getElementById('detail-tag').textContent = `${levelTitle} · Hari ${day} dari 30`;
+  document.getElementById('detail-tag').textContent = `${levelTitle} · Latihan ke-${day} dari 30`;
   document.getElementById('detail-title').textContent = d.title;
-  document.getElementById('detail-sub').textContent = DATA[currentLevel].sub;
+  document.getElementById('detail-sub').textContent = "Lakukan semua gerakan ini setiap hari selama interval yang ditentukan.";
   document.getElementById('yt-frame').src = `https://www.youtube.com/embed/${d.video}?rel=0`;
-  document.getElementById('ex-list').innerHTML = d.exercises.map((ex, i) =>
+  
+  // Menampilkan list gerakan yang sesuai dengan teks pdf
+  document.getElementById('ex-list').innerHTML = d.exercises.map((ex) =>
     `<div class="ex-row">
-      <span class="ex-idx">0${i+1}</span>
+      <span class="ex-idx">●</span>
       <div>
         <div class="ex-name">${ex[0]}</div>
         <div class="ex-detail">${ex[1]}</div>
